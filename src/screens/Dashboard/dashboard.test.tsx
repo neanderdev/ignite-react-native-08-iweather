@@ -1,6 +1,6 @@
 import { mockCityAPIResponse } from "@__tests__/mocks/api/mockCityAPIResponse"
 import { mockWeatherAPIResponse } from "@__tests__/mocks/api/mockWeatherAPIResponse"
-import { render, screen, waitFor } from "@__tests__/utils/customRender"
+import { render, screen, waitFor, waitForElementToBeRemoved } from "@__tests__/utils/customRender"
 
 import { Dashboard } from "@screens/Dashboard"
 
@@ -41,5 +41,11 @@ describe("Screen: Dashboard", () => {
             .mockResolvedValueOnce({ data: mockWeatherAPIResponse })
             .mockResolvedValueOnce({ data: mockCityAPIResponse })
             .mockResolvedValueOnce({ data: mockWeatherAPIResponse })
+
+        const { debug } = render(<Dashboard />)
+
+        await waitForElementToBeRemoved(() => screen.queryByTestId('loading'))
+
+        debug()
     })
 })
