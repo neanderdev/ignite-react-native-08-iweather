@@ -25,6 +25,9 @@ jobs:
       - name: Run Tests
         run: npm test
 
+      - name: Echo Secrest
+        run: echo ${{ secrets.EAS_EXPO_TOKEN }} 
+
   CD: 
     name: Continuous Delivery
     runs-on: ubuntu-latest
